@@ -1,0 +1,61 @@
+<h1>Parties list link helper</h1>
+
+<h2>Link</h2>
+<form>
+<b>Copy this link for embedding</b><input type='text' id='url' readonly />
+
+<h2>Options</h2>
+<select id='lang' onChange="update()">
+	<option selected value='en'>English</option>
+	<option value='cc'>Country Code</option>
+	<option value='fr'>French</option>
+	<option value='de'>German</option>
+	<option value='ru'>Russian</option>
+	<option value='nl'>Dutch</option>
+	<option value='cz'>Czech</option>
+	<option value='hr'>Croatian</option>
+</select>
+
+
+<br><input type="checkbox" onChange="update()" id="nopic"> Show no flag pictures
+<br><input type="checkbox" onChange="update()" id="showppi"> PP-International will be listed as a Link
+<br><input type="checkbox" onChange="update()" id="showmembers"> Show all PPI member parties in bold font
+<br><input type="checkbox" onChange="update()" id="onlymembers"> Only list PPI member parties
+
+</form>
+
+<h2>Preview</h2>
+<br>
+<iframe id='iframe' width="90%" height="400" src='http://pp.3025-game.de/rss2.php'>Your browser does not support iFrames? rly? :-(</iframe>
+<br>
+
+<script>
+function update(){
+	var lang=document.getElementById("lang").value;
+	
+	var source="http://pp.3025-game.de/rss2.php?lang="+lang
+				+(document.getElementById("nopic").checked?'&nopic':'')
+				+(document.getElementById("showppi").checked?'&showppi':'')
+				+(document.getElementById("showmembers").checked?'&showmembers':'')
+				+(document.getElementById("onlymembers").checked?'&onlymembers':'');
+	//var source="http://pp.3025-game.de/rss2.php?lang="+lang+nopic+showppi+showmembers+onlymembers;
+	document.getElementById("iframe").src=source;
+	document.getElementById("url").value=source;
+}
+update();
+</script>
+<hr>
+<h2>Option list for manual composition</h2>
+<b>Possible paramaters in the URL to put after the "?" (to combine them, use the ampersand "&")</b>
+<pre>
+nopic : Show no flag pictures
+showppi : PP-International will be listed as a Link
+showmembers : Show all PPI member parties in bold font
+onlymembers : Only list PPI member parties
+lang=cc : Show list with country codes instead of English
+lang=fr : Show list in French instead of English
+lang=de : Show list in German instead of English
+lang=ru : Show list in Russian instead of English
+lang=nl : Show list in Dutch instead of English
+lang=cz : Show list in Czech instead of English
+</pre>
